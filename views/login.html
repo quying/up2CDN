@@ -1,0 +1,34 @@
+{% extends './layout.html' %}
+{% block title %} 登录 {% endblock %}
+{% block content %}
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	 	<a class="navbar-brand mr-auto" href="#">Up2CDN</a>
+	 	<ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/login">登录</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/register">注册</a>
+	      </li>
+	      
+	    </ul>
+	</nav>
+
+   
+	<form class="form border rounded">
+	  	<div class="form-group">
+		    <label for="oaName">帐号</label>
+		    <input type="text" class="form-control" id="oaName" name="oaName" placeholder="请输入oa用户名" maxlength="30">
+	  	</div>
+	  	<div class="form-group">
+		    <label for="password">密码</label>
+		    <input type="password" class="form-control" id="password" name="password" placeholder="" maxlength="30">
+	  	</div>
+	  
+	  	<button type="button" id="submit" class="btn btn-primary btn-block">登录</button>
+	</form>
+	{% block script  %}
+	<script type="text/javascript" src="/js/login.js"></script>
+    {% endblock  %} 
+        
+{% endblock %}

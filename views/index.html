@@ -1,0 +1,62 @@
+{% extends './layout.html' %}
+{% block title %} index {% endblock %}
+{% block content %}
+    <div>
+    	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		 	<a class="navbar-brand mr-auto" href="#">Up2CDN</a>
+		 	<div class="navbar-text">
+		      	{{ username }}
+		    </div>
+		</nav>
+
+		<div class="project text-center">
+			<label>选择项目</label>
+	        <select class="custom-select">
+	        {% for item in projects %}
+			  	<option value="{{ item.path }}">{{ item.name }}</option>
+			{% endfor %}
+			</select>
+
+			<button  type="button" class="btn btn-primary">Connect</button>
+		</div>
+
+		<div class="text-center">
+			<label class="custom-file">
+			  	<input type="file" id="fileInput" class="custom-file-input" disabled="disabled">
+			  	<span class="custom-file-control"></span>
+			</label>
+		</div>
+
+		<table class="table table-striped table-custom">
+			<thead>
+			    <tr>
+			      <th scope="col"></th>
+			      <th scope="col">文件</th>
+			      <th scope="col">上传时间</th>
+			      <th scope="col">上传地址</th>
+			    </tr>
+			</thead>
+			<tbody>
+			    <tr>
+			      <th scope="row">1</th>
+			      <td>Mark</td>
+			      <td>Otto</td>
+			      <td>@mdo</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">2</th>
+			      <td>Jacob</td>
+			      <td>Thornton</td>
+			      <td>@fat</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">3</th>
+			      <td>Larry</td>
+			      <td>the Bird</td>
+			      <td>@twitter</td>
+			    </tr>
+			</tbody>
+		</table>
+		
+    <div>
+{% endblock %}

@@ -1,0 +1,33 @@
+body {
+	background-color: #f1f1f1;
+}
+/* login */
+.form {
+	width: 300px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 30px;
+    background-color: #fff;
+}
+/* index */
+.custom-file-control:empty::after {
+    content: "Choose file...";
+    text-align: left;
+}
+.custom-file-control::before {
+    content: "上传";
+    
+}
+.project {
+	margin: 20px 0;
+}
+.custom-select {
+	min-width: 200px;
+}
+.table-custom {
+	width: 80%;
+	background-color: #fff;
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}

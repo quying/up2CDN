@@ -1,0 +1,54 @@
+{% extends './layout.html' %}
+{% block title %} admin {% endblock %}
+{% block content %}
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		 	<a class="navbar-brand mr-auto" href="#">Up2CDN</a>
+		 	<div class="navbar-text">
+		      	{{ username }}
+		    </div>
+		</nav>
+
+		<ul class="nav nav-tabs">
+		  	<li class="nav-item">
+		    	<a class="nav-link active" href="#">用户管理</a>
+		  	</li>
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="#">项目管理</a>
+		  	</li>
+		  
+		</ul>
+
+		<table class="table table-striped table-custom">
+			<thead>
+			    <tr>
+			      <th scope="col"></th>
+			      <th scope="col">用户</th>
+			      <th scope="col">创建时间</th>
+			      <th scope="col">操作</th>
+			    </tr>
+			</thead>
+			<tbody>
+			    <tr>
+			      <th scope="row">1</th>
+			      <td>Mark</td>
+			      <td>Otto</td>
+			      <td>@mdo</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">2</th>
+			      <td>Jacob</td>
+			      <td>Thornton</td>
+			      <td>@fat</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">3</th>
+			      <td>Larry</td>
+			      <td>the Bird</td>
+			      <td>@twitter</td>
+			    </tr>
+			</tbody>
+		</table>
+            
+    <div>
+{% endblock %}
