@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
+    "ftp": "^0.3.10",
     "koa": "^2.4.1",
     "koa-body": "^2.5.0",
     "koa-logger": "^2.0.1",

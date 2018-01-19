@@ -11,12 +11,15 @@ module.exports = {
 			ctx.body = await ctx.render('login');
 		// }	
 
-		next();
 	},
 	register: async (ctx, next) => {
-		ctx.body = await ctx.render('register');
+		// if(ctx.session.username) {
+		// 	ctx.status = 303;
+		// 	ctx.redirect('/');
+		// } else {
+			ctx.body = await ctx.render('register');
+		// }
 
-		next();
 	},
 	loginHandler: async (ctx, next) => {
 		const body = ctx.request.body;
@@ -58,7 +61,6 @@ module.exports = {
 			
 			console.log(e);
 		}
-		next();
 	},
 	registerHandler: async (ctx, next) => {
 		try {
@@ -95,7 +97,6 @@ module.exports = {
 				detail: '注册失败'
 			}
 		}
-		next();
 	}
 }
 

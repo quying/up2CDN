@@ -3,9 +3,11 @@ const Schema = mongoose.Schema;
 
 // 用户模式
 const projectSchema = new Schema({
-    name: String,
+    projectname: String,
+    server: String,
     path: String,
-
+    username: String,
+    password: String,
 });
 
 

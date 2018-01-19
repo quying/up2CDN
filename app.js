@@ -8,7 +8,6 @@ const static = require('koa-static');
 const session = require('koa-session');
 const mongoose = require('mongoose');
 
-// const admin_route = require('./routes/admin_route.js');
 const route = require('./routes/index.js');
 
 const app = new Koa();
@@ -52,7 +51,7 @@ app.context.render = co.wrap(swig({
 
 // 路由
 const router = new Router();
-// admin_route(router);
+
 route(router);
 
 // const main = ctx => {

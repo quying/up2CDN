@@ -8,25 +8,24 @@
 		      	{{ username }}
 		    </div>
 		</nav>
+		<form id="form" method="post" action="/upload" enctype="multipart/form-data">
+			<div class="project text-center">
+				<label>选择项目</label>
+		        <select id="project" name="project" class="custom-select">
+		        {% for item in projects %}
+				  	<option value="{{ item.id }}">{{ item.projectname }}</option>
+				{% endfor %}
+				</select>
+			</div>
 
-		<div class="project text-center">
-			<label>选择项目</label>
-	        <select class="custom-select">
-	        {% for item in projects %}
-			  	<option value="{{ item.path }}">{{ item.name }}</option>
-			{% endfor %}
-			</select>
-
-			<button  type="button" class="btn btn-primary">Connect</button>
-		</div>
-
-		<div class="text-center">
-			<label class="custom-file">
-			  	<input type="file" id="fileInput" class="custom-file-input" disabled="disabled">
-			  	<span class="custom-file-control"></span>
-			</label>
-		</div>
-
+			<div class="text-center">
+				<label class="custom-file">
+				  	<input type="file" id="file" name="img" class="custom-file-input" >
+				  	<span class="custom-file-control"></span>
+				</label>
+			</div>
+		</form>
+		{% if records %}
 		<table class="table table-striped table-custom">
 			<thead>
 			    <tr>
@@ -37,26 +36,19 @@
 			    </tr>
 			</thead>
 			<tbody>
-			    <tr>
-			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>Jacob</td>
-			      <td>Thornton</td>
-			      <td>@fat</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td>Larry</td>
-			      <td>the Bird</td>
-			      <td>@twitter</td>
-			    </tr>
+			    {% for item in records %}
+			  		<tr>
+				      <th scope="row">{{ loop.index }}</th>
+				      <td class="">{{ item.filename }}</td>
+				      <td>{{ item.time|date('Y-m-d H:i:s')}}</td>
+				      <td>{{ item.url }}</td>
+				    </tr>
+				{% endfor %}
 			</tbody>
 		</table>
-		
+		{% endif %}
     <div>
+    {% block script  %}
+	<script type="text/javascript" src="/js/index.js"></script>
+    {% endblock  %} 
 {% endblock %}
