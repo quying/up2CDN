@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const projectSchema = new Schema({
     projectname: String,
     server: String,
+    prefix: String,
     path: String,
     username: String,
     password: String,
