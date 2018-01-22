@@ -64,6 +64,7 @@ route(router);
 // router.get('/', main)
 
 app.use(router.routes());
+app.use(router.allowedMethods());
 // app.on('error', (err, ctx) => {
 //   console.log('logging error ', err.message);
 //   console.log(err);

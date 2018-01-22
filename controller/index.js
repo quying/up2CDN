@@ -49,7 +49,7 @@ module.exports = {
 			})*/
 			
 			const username = ctx.session.username;
-			const projects = await Project.find({}, {projectname: 1});
+			const projects = await Project.find({}, {projectname: 1}); 
 			const user = await User.findOne({username: username});
 			const records = user.resource;
 
@@ -72,7 +72,6 @@ module.exports = {
 		});
 		
 		client = new ftp();
-		connect(project);
 		
 		client.on('ready', function() {
 			log('---------连接cdn服务器成功----------');
@@ -82,7 +81,7 @@ module.exports = {
 			const newName = rename(file.name);
 			const destpath = project.path + newName;
 
-			client.put(rs, destpath, false, function(err) {
+			client.put(rs, destpath, false, async (err) => {
 				if (err) {
 					return log('upload error: ' + err);
 				}
@@ -100,10 +99,12 @@ module.exports = {
 						log(err);
 					}
 				});
+				ctx.body = {
+					code: 1
+				}
 			});
 			
 			client.end();
-			// ctx.redirect('/');
 
 		})
 		client.on('error', function(e) {
@@ -114,5 +115,7 @@ module.exports = {
 			removeTemImage(file.path);
 			log('---------断开连接----------');
 		})
+
+		connect(project);
 	}
 }

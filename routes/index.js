@@ -5,14 +5,14 @@ const koaBody = require('koa-body');
 const path = require('path');
 
 module.exports = function (router) {
-	router.get('/', home.index);
+	
 	router.post('/upload', koaBody({
 		multipart: true, 
 		formidable: {
 	      uploadDir: path.join(__dirname, '../uploads')
 	    }
 	}), home.upload);
-	
+	router.get('/', home.index);
 	router.get('/login', login.login);
 	router.post('/login/submit', koaBody(), login.loginHandler);
 
