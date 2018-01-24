@@ -11,7 +11,7 @@ let client;
 
 function rename (fileName) {
 	const stamp = Date.now() + Math.random().toString(16).substr(2);
-  	return fileName.replace(/(\w+)\.(\w)/, `${stamp}.$2`);
+  	return fileName.replace(/(.+)\.(\w)/, `${stamp}.$2`);
 }
 
 function removeTemImage (path) {
@@ -72,50 +72,70 @@ module.exports = {
 		});
 		
 		client = new ftp();
+
+		let body = await (() => {
+			return new Promise((resolve, reject) => {
+				client.on('ready', async () => {
+					log('---------连接cdn服务器成功----------');
+					//上传
+					const rs = fs.createReadStream(file.path);
+					
+					const newName = rename(file.name);
+					const destpath = project.path + newName;
+					
+					client.put(rs, destpath, false, (err) => {
+						if (err) {
+							log('upload error: ' + err);
+							return resolve({
+								code: 0,
+								detail: '上传失败'
+							});
+						}
+						log('upload:' + newName);
+					
+						// 存库
+						const resUrl = project.prefix + project.path + newName;
+						const resource = {
+							filename: file.name,
+						    time: new Date(),
+						    url: resUrl
+						}
+						User.update({username: username}, { '$addToSet':{resource: resource} }, (err) => {
+							if(err) {
+								client.delete(destpath, () => {
+									log('delete cdn\'s file.')
+								})
+								log('database error: ' + err);
+								return resolve({
+									code: 0,
+									detail: '上传失败'
+								});
+							}
+						});
+						return resolve({
+							code: 1,
+							detail: ''
+						});
+					});
 		
-		client.on('ready', function() {
-			log('---------连接cdn服务器成功----------');
-			//上传
-			const rs = fs.createReadStream(file.path);
-			// const proPath = '/static/picTest/';
-			const newName = rename(file.name);
-			const destpath = project.path + newName;
-
-			client.put(rs, destpath, false, async (err) => {
-				if (err) {
-					return log('upload error: ' + err);
-				}
-				log('upload:' + newName);
-				
-				//存库
-				const resUrl = project.prefix + project.path + newName;
-				const resource = {
-					filename: file.name,
-				    time: new Date(),
-				    url: resUrl
-				}
-				User.update({username: username}, { '$addToSet':{resource: resource} }, (err) => {
-					if(err) {
-						log(err);
-					}
+					client.end();
 				});
-				ctx.body = {
-					code: 1
-				}
+
+				client.on('error', function(e) {
+					log('---------重新连接----------');
+					connect();
+				});
+				client.on('end', function() {
+					
+					log('---------断开连接----------');
+				});
+
+				connect(project);
+				
 			});
-			
-			client.end();
+		})()
 
-		})
-		client.on('error', function(e) {
-			log('---------重新连接----------');
-			connect();
-		})
-		client.on('end', function() {log(file.path);
-			removeTemImage(file.path);
-			log('---------断开连接----------');
-		})
-
-		connect(project);
+		ctx.body = body;
+		removeTemImage(file.path);
 	}
 }
