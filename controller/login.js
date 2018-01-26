@@ -4,21 +4,21 @@ const crypto = require('crypto');
 
 module.exports = {
 	login: async (ctx, next) => {
-		// if(ctx.session.username) {
-		// 	ctx.status = 303;
-		// 	ctx.redirect('/');
-		// } else {
+		if(ctx.session.username) {
+			ctx.status = 303;
+			ctx.redirect('/');
+		} else {
 			ctx.body = await ctx.render('login');
-		// }	
+		}	
 
 	},
 	register: async (ctx, next) => {
-		// if(ctx.session.username) {
-		// 	ctx.status = 303;
-		// 	ctx.redirect('/');
-		// } else {
+		if(ctx.session.username) {
+			ctx.status = 303;
+			ctx.redirect('/');
+		} else {
 			ctx.body = await ctx.render('register');
-		// }
+		}
 
 	},
 	loginHandler: async (ctx, next) => {

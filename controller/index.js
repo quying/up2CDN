@@ -3,8 +3,7 @@ const User = require('../models/user.js');
 const fs = require('fs');
 const ftp = require('ftp');
 const path = require('path');
-const URL = require('url');
-// const crypto = require('crypto');
+
 const log = console.log;
 
 let client;
@@ -23,10 +22,8 @@ function removeTemImage (path) {
 }
 
 function connect(project) {
-	const url = URL.parse('10.126.91.142');
-	
 	client.connect({
-		host:  url.path,
+		host: project.server,
 		user: project.username,
 		password: project.password,
 		keepalive: 1000
@@ -38,16 +35,7 @@ module.exports = {
 		if (!ctx.session.username) {
 			ctx.status = 303;
 			ctx.redirect('/login');
-		} else {
-			/*Project.create({
-				projectname: "cfq",
-			    server: "static.upload.58dns.org",
-			    prefix: "c.58cdn.com.cn/chejinrong_static",
-			    path: "/static/picTest/",
-			    username: "58jr_chejinrong_static",
-			    password: "ICBYRybhXAi",
-			})*/
-			
+		} else {			
 			const username = ctx.session.username;
 			const projects = await Project.find({}, {projectname: 1}); 
 			const user = await User.findOne({username: username});

@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 // 用户模式
 const projectSchema = new Schema({
-    projectname: String,
-    server: String,
-    prefix: String,
-    path: String,
-    username: String,
-    password: String,
+    projectname: String,	//项目名称
+    server: String,			//server域名
+    prefix: String,			//cdn路径
+    path: String,			//目标路径
+    username: String,		//ftp用户名
+    password: String,		//密码
 });
 
 
